@@ -258,9 +258,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Конвертор для PowerGraph"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Конвертер для PowerGraph"))
         self.ConvertFile.setText(_translate("MainWindow", "Конвертировать"))
-        self.label.setText(_translate("MainWindow", "Конвертор из .pgc в .txt"))
+        self.label.setText(_translate("MainWindow", "Конвертер из .pgc в .txt"))
         self.LoadFile.setText(_translate("MainWindow", "   Выбор файла"))
         self.DragDropLabel.setText(_translate("MainWindow", " Перетащите \n"
 "файл сюда"))
