@@ -261,7 +261,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Конвертер для PowerGraph"))
         self.ConvertFile.setText(_translate("MainWindow", "Конвертировать"))
         self.label.setText(_translate("MainWindow", "Конвертер из .pgc в .txt"))
-        self.LoadFile.setText(_translate("MainWindow", "   Выбор файла"))
+        self.LoadFile.setText(_translate("MainWindow", "   Выбери файл"))
         self.DragDropLabel.setText(_translate("MainWindow", " Перетащите \n"
 "файл сюда"))
         self.SaveFile.setText(_translate("MainWindow", "   Сохранить в"))
