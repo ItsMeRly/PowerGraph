@@ -2,7 +2,7 @@ import os
 from sys import argv, exit
 from pathlib import Path
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QLineEdit
 from PyQt5.QtGui import QIcon
 from window_ui import Ui_MainWindow
 from reader import (
@@ -17,7 +17,6 @@ class Converter(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.init_UI()
-        self.ui.DragDropLabel.setAcceptDrops(True)
         self.__path: Optional[Path] = None
         self.__save_path: Optional[Path] = None
 
@@ -27,7 +26,8 @@ class Converter(QtWidgets.QMainWindow):
         self.ui.LoadFile.clicked.connect(self.__browse)
         self.ui.ConvertFile.clicked.connect(self.__convert)
         self.ui.SaveFile.clicked.connect(self.__browse_save)
-
+        self.setAcceptDrops(True)
+        
     def __browse(self):
         self.__path = self.__get_path('pgc')
         self.ui.DragDropLabel.setText(os.path.basename(self.__path))
@@ -66,6 +66,17 @@ class Converter(QtWidgets.QMainWindow):
             self.__save_path = None
             self.__show_success()
 
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.accept()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event):
+        files = [u.toLocalFile() for u in event.mimeData().urls()]
+        self.__path = files[0]
+        self.ui.DragDropLabel.setText(os.path.basename(self.__path))
+
     def __show_error(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
@@ -79,6 +90,7 @@ class Converter(QtWidgets.QMainWindow):
         msg.setText('Всё прошло атлишна')
         msg.setWindowTitle('Yay')
         msg.exec()
+
 
 
 app = QtWidgets.QApplication(argv)
